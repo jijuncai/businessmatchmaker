@@ -10,6 +10,9 @@ const app = express();
 app.use(cors());
 const router = express.Router();
 
+// prepare for aws
+const path = require("path");
+
 //这是我们的MongoDB数据库
 const dbRoute =
     'mongodb+srv://jijuncai:Caijijun12@bmm-y8gjg.mongodb.net/test?retryWrites=true&w=majority';
@@ -28,6 +31,10 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // bodyParser，将请求体解析为可读的json格式
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// prepare for aws
+app.use(express.static(path.join(__driname,"businessmm/build")));
+
 app.use(logger('dev'));
 
 //这是我们的get方法
